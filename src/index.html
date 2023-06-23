@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kültürlendin</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="wrapper">
+    <main id="app-container" class="app-container">
+      <section id="tooltip-container" class="tooltip-container">
+        <div class="tooltip">
+
+          <span class="tooltip-info">Kültürlendin</span>
+          <div class="tooltip-buttons">
+            <span id="flame-button" class="flame-button" data-tooltip="Yarı&nbsp;Yarıya">
+              <i data-lucide="flame"></i>
+            </span>
+            <span id="hint-button" class="hint-button" data-tooltip="Ipucu">
+              <i data-lucide="sparkles"></i>
+            </span>
+            <span id="tooltip-button" class="tooltip-button" data-tooltip="Bilgilendirme">
+              <i data-lucide="info"></i>
+            </span>
+          </div>
+        </div>
+      </section>
+      <section id="quiz-start-button-container" class="quiz-start-button-container">
+        <button id="quiz-start-button" class="quiz-start-button">Testi Başlat</button>
+        <div id="countdown-container" class="countdown-container"></div>
+      </section>
+      <section id="question-container" class="question-container">
+        <div id="hint"></div>
+      </section>
+    </main>
+    <script src="main.js"></script>
+    <!-- Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

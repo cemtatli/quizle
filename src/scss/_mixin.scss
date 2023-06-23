@@ -1,0 +1,33 @@
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40ch;
+}
+
+@mixin antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@mixin animate {
+  animation-name: countdown-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@mixin animate-app {
+  animation-name: quiz-app-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}

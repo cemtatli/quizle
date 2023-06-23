@@ -1,0 +1,615 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap"); /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@keyframes countdown-animation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes quiz-app-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Mulish", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: 16px;
+  background-color: #161618;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    padding: 0;
+  }
+}
+.wrapper .app-container {
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 16px;
+  border: 1px solid #434347;
+  border-radius: 8px;
+  background-color: #1e1e20;
+  animation-name: quiz-app-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+@media screen and (max-width: 768px) {
+  .wrapper .app-container {
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+.wrapper .app-container .tooltip-container {
+  width: 100%;
+  height: 80px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #f2f2f3;
+  border: 1px solid #434347;
+  background-color: #1b1b1e;
+  border-radius: 8px;
+}
+@media screen and (max-width: 768px) {
+  .wrapper .app-container .tooltip-container {
+    padding: 16px 8px;
+  }
+}
+.wrapper .app-container .tooltip-container .tooltip {
+  width: 100%;
+  height: 48px;
+  gap: 4px;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper .app-container .tooltip-container .tooltip .tooltip-info {
+  font-size: 22px;
+  font-weight: 700;
+}
+@media screen and (max-width: 768px) {
+  .wrapper .app-container .tooltip-container .tooltip .tooltip-info {
+    font-size: 18px;
+  }
+}
+.wrapper .app-container .tooltip-container .tooltip-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+@media screen and (max-width: 768px) {
+  .wrapper .app-container .tooltip-container .tooltip-buttons {
+    gap: 4px;
+  }
+}
+.wrapper .app-container .tooltip-container .tooltip-buttons .tooltip-button,
+.wrapper .app-container .tooltip-container .tooltip-buttons .hint-button,
+.wrapper .app-container .tooltip-container .tooltip-buttons .flame-button,
+.wrapper .app-container .tooltip-container .tooltip-buttons .restart-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 768px) {
+  .wrapper .app-container .tooltip-container .tooltip-buttons .tooltip-button,
+  .wrapper .app-container .tooltip-container .tooltip-buttons .hint-button,
+  .wrapper .app-container .tooltip-container .tooltip-buttons .flame-button,
+  .wrapper .app-container .tooltip-container .tooltip-buttons .restart-button {
+    width: 36px;
+    height: 36px;
+  }
+}
+.wrapper .app-container .tooltip-container .tooltip-buttons .tooltip-button:hover,
+.wrapper .app-container .tooltip-container .tooltip-buttons .hint-button:hover,
+.wrapper .app-container .tooltip-container .tooltip-buttons .flame-button:hover,
+.wrapper .app-container .tooltip-container .tooltip-buttons .restart-button:hover {
+  cursor: pointer;
+  background-color: #4f4f55;
+  color: #fada4e;
+  transition: 300ms background-color ease-in;
+}
+.wrapper .app-container .tooltip-container .tooltip-buttons .tooltip-button:hover::before,
+.wrapper .app-container .tooltip-container .tooltip-buttons .hint-button:hover::before,
+.wrapper .app-container .tooltip-container .tooltip-buttons .flame-button:hover::before,
+.wrapper .app-container .tooltip-container .tooltip-buttons .restart-button:hover::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  padding: 8px;
+  transform: translateX(-50%);
+  opacity: 1;
+  visibility: visible;
+  background-color: #1e1e20;
+  color: #f2f2f3;
+  border: 1px solid #434347;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+@media screen and (min-width: 540px) {
+  .wrapper .app-container .tooltip-container .tooltip-buttons .tooltip-button:hover::before,
+  .wrapper .app-container .tooltip-container .tooltip-buttons .hint-button:hover::before,
+  .wrapper .app-container .tooltip-container .tooltip-buttons .flame-button:hover::before,
+  .wrapper .app-container .tooltip-container .tooltip-buttons .restart-button:hover::before {
+    font-size: 14px;
+  }
+}
+.wrapper .app-container .dialog-menu-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper .app-container .dialog-menu-container.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.wrapper .app-container .dialog-menu-container .dialog-menu {
+  width: calc(100% - 2rem);
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid #434347;
+  margin: 16px 0;
+  padding: 3rem 1.5rem;
+  position: relative;
+  text-align: center;
+  background-color: #161618;
+  color: #f2f2f3;
+  font-size: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: #161618 0px 4px 8px;
+  border: 1px solid #434347;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 768px) {
+  .wrapper .app-container .dialog-menu-container .dialog-menu {
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 350px;
+    padding: 16px;
+  }
+}
+.wrapper .app-container .dialog-menu-container .dialog-menu ul {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wrapper .app-container .dialog-menu-container .dialog-menu ul li {
+  text-align: start;
+  list-style-type: square;
+}
+.wrapper .app-container .dialog-menu-container .dialog-menu .dialog-menu-title {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  color: #f2f2f3;
+  border-bottom: 1px solid #434347;
+  padding: 12px 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.wrapper .app-container .dialog-menu-container .dialog-menu .dialog-menu-close-button {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  color: #f2f2f3;
+  font-size: 16px;
+  background-color: #1e1e20;
+  padding: 12px 8px;
+  font-weight: 600;
+  border: none;
+}
+.wrapper .app-container .dialog-menu-container .dialog-menu .dialog-menu-close-button:hover {
+  color: #fada4e;
+}
+.wrapper .app-container .quiz-start-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 8rem);
+}
+.wrapper .app-container .quiz-start-button-container .quiz-start-button {
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  padding: 16px;
+  text-transform: uppercase;
+  background-color: #1e1e20;
+  border: 1px solid #434347;
+  outline: none;
+  font-size: 18px;
+  color: #f2f2f3;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.wrapper .app-container .quiz-start-button-container .quiz-start-button:hover {
+  transition: 300ms background-color ease-in;
+  background-color: #37373a;
+}
+.wrapper .app-container .quiz-start-button-container .countdown-container {
+  display: none;
+  width: 96px;
+  height: 96px;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #f2f2f3;
+  font-weight: 700;
+  border-radius: 15984px;
+  border: 1px solid #434347;
+  animation-name: countdown-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.wrapper .app-container .question-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.wrapper .app-container .question-container .questions {
+  margin-top: 16px;
+  padding: 0 16px;
+  border-radius: 8px;
+  height: calc(100vh - 8rem);
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #434347;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 768px) {
+  .wrapper .app-container .question-container .questions {
+    height: calc(100vh - 10rem);
+  }
+}
+.wrapper .app-container .question-container .questions .quiz-buttons-container {
+  width: 100%;
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+}
+.wrapper .app-container .question-container .questions .quiz-buttons-container button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.wrapper .app-container .question-container .questions .quiz-buttons-container button:disabled {
+  opacity: 0.15;
+  cursor: not-allowed;
+}
+.wrapper .app-container .question-container .questions .question-title {
+  width: 100%;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  color: #f2f2f3;
+}
+.wrapper .app-container .question-container .questions .question-difficulty {
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 1px solid #434347;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background-color: #161618;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+  color: #f2f2f3;
+}
+.wrapper .app-container .question-container .questions ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 16px;
+  text-align: center;
+  flex-direction: column;
+  gap: 6px;
+}
+.wrapper .app-container .question-container .questions ul .question-option {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #f2f2f3;
+  text-align: center;
+  display: inline-flex;
+}
+.wrapper .app-container .question-container .questions ul .question-option:hover {
+  scale: 1.01;
+  transition: scale 0.3s ease;
+}
+.wrapper .app-container .question-container .questions ul .question-option label {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  border: 1px solid #434347;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+}
+.wrapper .app-container .question-container .questions ul .question-option label:has(input[type=radio]:checked) {
+  background-color: #030303;
+  border: 1px dashed #5c5c62;
+}
+.wrapper .app-container .question-container .questions ul .question-option label input[type=radio] {
+  visibility: hidden;
+}
+.wrapper .app-container .question-container .questions .previous-button,
+.wrapper .app-container .question-container .questions .next-button {
+  height: 50px;
+  width: 100%;
+  outline: none;
+  background-color: #27272c;
+  font-weight: 600;
+  color: #f2f2f3;
+  font-size: 16px;
+  border: 1px solid #434347;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wrapper .app-container .question-container .questions .previous-button:disabled,
+.wrapper .app-container .question-container .questions .next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.wrapper .app-container .question-container .questions .previous-button:not([disabled]):hover,
+.wrapper .app-container .question-container .questions .next-button:not([disabled]):hover {
+  background-color: #fada4e;
+  color: #1e1e20;
+  transition: 0.3s all ease-in;
+}
+.wrapper .app-container .question-container .results-container {
+  margin-top: 16px;
+  padding: 0 16px;
+  border-radius: 8px;
+  height: calc(100vh - 8rem);
+  width: 100%;
+  border: 1px solid #434347;
+  flex-direction: column;
+  gap: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 768px) {
+  .wrapper .app-container .question-container .results-container {
+    height: calc(100vh - 10rem);
+  }
+}
+.wrapper .app-container .question-container .results-container p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #f2f2f3;
+  cursor: pointer;
+}
+.wrapper .app-container .question-container .results-container .restart-button {
+  height: 50px;
+  width: 100%;
+  outline: none;
+  background-color: #27272c;
+  font-weight: 600;
+  color: #f2f2f3;
+  font-size: 16px;
+  border: 1px solid #434347;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wrapper .app-container .question-container .results-container .result-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: start;
+}
+.wrapper .app-container .question-container .results-container .result-container p {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border: 1px solid #434347;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+}
+.wrapper .app-container .question-container .results-container .result-container p.wrong-answer {
+  border: 1px solid #ee5859;
+}
+.wrapper .app-container .question-container .results-container .result-container p.correct-answer {
+  border: 1px solid #30a960;
+}/*# sourceMappingURL=style.css.map */

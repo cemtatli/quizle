@@ -1,0 +1,387 @@
+@import 'variables';
+@import 'mixin';
+@import 'reset';
+@import 'keyframes';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-primary;
+  @include antialiased;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: $space;
+  background-color: $color-background;
+  @media screen and (max-width: $break-md) {
+    padding: 0;
+  }
+  .app-container {
+    position: relative;
+    width: 100%;
+    max-width: 1024px;
+    height: calc(100vh - 2rem);
+    margin: auto;
+    padding: $space;
+    border: $border;
+    border-radius: $rounded-md;
+    background-color: $color-primary;
+    @include animate-app;
+    @media screen and (max-width: $break-md) {
+      height: calc(100vh);
+      border-radius: 0;
+    }
+    .tooltip-container {
+      width: 100%;
+      height: 80px;
+      padding: $space;
+      @include between;
+      color: $color-text;
+      border: $border;
+      background-color: darken($color: $color-secondary, $amount: 5%);
+      border-radius: $rounded-md;
+      @media screen and (max-width: $break-md) {
+        padding: $space $space-md;
+      }
+      .tooltip {
+        width: 100%;
+        height: 48px;
+        gap: $space-sm;
+        padding: 0 0.75rem;
+        @include between;
+        .tooltip-info {
+          font-size: $font-xl;
+          font-weight: 700;
+          @media screen and (max-width: $break-md) {
+            font-size: $font-lg;
+          }
+        }
+      }
+      .tooltip-buttons {
+        @include center;
+        gap: $space-md;
+        @media screen and (max-width: $break-md) {
+          gap: $space-sm;
+        }
+        .tooltip-button,
+        .hint-button,
+        .flame-button,
+        .restart-button {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          border-radius: $rounded-md;
+          @include center;
+          @media screen and (max-width: $break-md) {
+            width: 36px;
+            height: 36px;
+          }
+          &:hover {
+            cursor: pointer;
+            background-color: lighten($color: $color-primary, $amount: 20%);
+            color: $color-yellow;
+            transition: 300ms background-color ease-in;
+            &::before {
+              content: attr(data-tooltip);
+              position: absolute;
+              bottom: -50px;
+              left: 50%;
+              padding: $space-md;
+              transform: translateX(-50%);
+              opacity: 1;
+              visibility: visible;
+              background-color: $color-primary;
+              color: $color-text;
+              border: $border;
+              border-radius: $rounded-md;
+              font-size: $font-xs;
+              transition: opacity 0.3s, visibility 0.3s;
+              @media screen and (min-width: $break-sm) {
+                font-size: $font-sm;
+              }
+            }
+          }
+        }
+      }
+    }
+    .dialog-menu-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 50;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      @include center;
+      &.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .dialog-menu {
+        width: calc(100% - 2rem);
+        height: fit-content;
+        border: $border;
+        margin: $space 0;
+        padding: 3rem 1.5rem;
+        position: relative;
+        text-align: center;
+        background-color: $color-background;
+        color: $color-text;
+        font-size: $font-base;
+        border-radius: $rounded-md;
+        overflow: hidden;
+        box-shadow: $shadow;
+        border: $border;
+        @include center;
+        @media screen and (min-width: $break-md) {
+          width: fit-content;
+          height: 350px;
+          padding: $space;
+        }
+        ul {
+          padding: $space;
+          display: flex;
+          flex-direction: column;
+          gap: $space-md;
+          li {
+            text-align: start;
+            list-style-type: square;
+          }
+        }
+        .dialog-menu-title {
+          position: absolute;
+          top: 0px;
+          width: 100%;
+          color: $color-text;
+          border-bottom: $border;
+          padding: $space-lg $space-md;
+          font-size: $font-lg;
+          font-weight: 600;
+        }
+        .dialog-menu-close-button {
+          cursor: pointer;
+          position: absolute;
+          bottom: 0px;
+          width: 100%;
+          color: $color-text;
+          font-size: $font-base;
+          background-color: $color-primary;
+          padding: $space-lg $space-md;
+          font-weight: 600;
+          border: none;
+          &:hover {
+            color: $color-yellow;
+          }
+        }
+      }
+    }
+    .quiz-start-button-container {
+      @include center;
+      height: calc(100vh - 8rem);
+      .quiz-start-button {
+        width: fit-content;
+        cursor: pointer;
+        padding: $space;
+        text-transform: uppercase;
+        background-color: $color-primary;
+        border: $border;
+        outline: none;
+        font-size: $font-lg;
+        color: $color-text;
+        border-radius: $rounded-md;
+        font-weight: 600;
+        &:hover {
+          transition: 300ms background-color ease-in;
+          background-color: lighten($color: $color-primary, $amount: 10%);
+        }
+      }
+      .countdown-container {
+        display: none;
+        width: 96px;
+        height: 96px;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: $color-text;
+        font-weight: 700;
+        border-radius: $rounded-full;
+        border: $border;
+        @include animate;
+      }
+    }
+    .question-container {
+      @include center;
+      height: fit-content;
+      .questions {
+        margin-top: $space;
+        padding: 0 $space;
+        border-radius: $rounded-md;
+        height: calc(100vh - 8rem);
+        @media screen and (min-width: $break-md) {
+          height: calc(100vh - 10rem);
+        }
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        border: $border;
+        @include center;
+        .quiz-buttons-container {
+          width: 100%;
+          max-width: 120px;
+          @include between;
+          padding: $space;
+          cursor: pointer;
+          button {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            &:disabled {
+              opacity: 0.15;
+              cursor: not-allowed;
+            }
+          }
+        }
+        .question-title {
+          width: 100%;
+          margin-bottom: $space;
+          font-size: $font-xl;
+          font-weight: 600;
+          text-align: center;
+          color: $color-text;
+        }
+        .question-difficulty {
+          width: fit-content;
+          border: $border;
+          border-radius: $rounded-md;
+          padding: $space-md $space-lg;
+          background-color: $color-background;
+          margin-bottom: $space;
+          font-size: $font-sm;
+          text-align: center;
+          color: $color-text;
+        }
+        ul {
+          @include center;
+          width: 100%;
+          margin-bottom: $space;
+          text-align: center;
+          flex-direction: column;
+          gap: 6px;
+          .question-option {
+            width: 100%;
+            font-size: $font-base;
+            font-weight: 600;
+            text-align: center;
+            color: $color-text;
+            text-align: center;
+            display: inline-flex;
+            &:hover {
+              scale: 1.01;
+              transition: scale 0.3s ease;
+            }
+            label {
+              width: 100%;
+              height: 100%;
+              padding: $space;
+              border: $border;
+              @include between;
+              cursor: pointer;
+              text-align: center;
+              flex: 1;
+              &:has(input[type='radio']:checked) {
+                background-color: darken($color: $color-secondary, $amount: 15%);
+                border: $border-dashed;
+              }
+              input[type='radio'] {
+                visibility: hidden;
+              }
+            }
+          }
+        }
+        .previous-button,
+        .next-button {
+          height: 50px;
+          width: 100%;
+          outline: none;
+          background-color: $color-secondary;
+          font-weight: 600;
+          color: $color-text;
+          font-size: $font-base;
+          border: $border;
+          @include center;
+          cursor: pointer;
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+          &:not([disabled]):hover {
+            background-color: $color-yellow;
+            color: $color-primary;
+            transition: 0.3s all ease-in;
+          }
+        }
+      }
+      .results-container {
+        margin-top: $space;
+        padding: 0 $space;
+        border-radius: $rounded-md;
+        height: calc(100vh - 8rem);
+        width: 100%;
+        border: $border;
+        flex-direction: column;
+        gap: $space-sm;
+        @media screen and (min-width: $break-md) {
+          height: calc(100vh - 10rem);
+        }
+        @include center;
+        p {
+          margin: $space-md 0;
+          font-size: $font-base;
+          color: $color-text;
+          cursor: pointer;
+        }
+        .restart-button {
+          height: 50px;
+          width: 100%;
+          outline: none;
+          background-color: $color-secondary;
+          font-weight: 600;
+          color: $color-text;
+          font-size: $font-base;
+          border: $border;
+          @include center;
+          cursor: pointer;
+        }
+        .result-container {
+          width: 100%;
+          @include center;
+          flex-direction: column;
+          text-align: start;
+          p {
+            &.wrong-answer {
+              border: 1px solid $color-wrong;
+            }
+            &.correct-answer {
+              border: 1px solid $color-correct;
+            }
+            width: 100%;
+            height: 100%;
+            padding: $space;
+            font-size: $font-base;
+            border: $border;
+            @include between;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+}

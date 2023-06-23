@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+
+$font-primary: 'Mulish', sans-serif;
+$font-secondary: 'Lobster', serif;
+
+$base-font-size: 16px;
+
+// Colors
+$color-primary: #1e1e20;
+$color-secondary: #27272c;
+$color-text: #f2f2f3;
+$color-yellow: #fada4e;
+$color-wrong: #ee5859;
+$color-correct: #30a960;
+$color-background: #161618;
+
+$border: 1px solid
+  lighten(
+    $color: $color-primary,
+    $amount: 15%,
+  );
+$border-dashed: 1px dashed
+  lighten(
+    $color: $color-primary,
+    $amount: 25%,
+  );
+$border-dark: 1px solid
+  darken(
+    $color: $color-primary,
+    $amount: 5%,
+  );
+
+// Animation
+$animation-duration: 0.3s;
+
+// Shadow
+$shadow: $color-background 0px 4px 8px;
+
+// Break-Points
+$break-xs: 320px;
+$break-sm: 540px;
+$break-md: 768px;
+$break-lg: 1024px;
+$break-xl: 1280px;
+
+// Font-Size
+$font-xs: $base-font-size * 0.75;
+$font-sm: $base-font-size * 0.875;
+$font-base: $base-font-size;
+$font-lg: $base-font-size * 1.125;
+$font-xl: $base-font-size * 1.375;
+
+// Border-Radius
+$rounded-sm: $base-font-size * 0.25;
+$rounded-md: $base-font-size * 0.5;
+$rounded-lg: $base-font-size * 0.75;
+$rounded-xl: $base-font-size;
+$rounded-full: $base-font-size * 999;
+
+$space-sm: $base-font-size * 0.25;
+$space-md: $base-font-size * 0.5;
+$space-lg: $base-font-size * 0.75;
+$space: $base-font-size;
